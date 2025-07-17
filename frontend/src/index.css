@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-<<<<<<< HEAD
 @layer base {
   html {
     font-family: 'Inter', system-ui, sans-serif;
@@ -47,7 +46,4 @@
   .text-balance {
     text-wrap: balance;
   }
-} 
-=======
-/* Add your global styles or Tailwind directives here */ 
->>>>>>> 8fd6958e2592dc5ac7bb552e19707f09e1e01f1a
+}

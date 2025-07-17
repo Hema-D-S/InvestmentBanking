@@ -1,12 +1,23 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaPiggyBank, FaMobileAlt, FaChartLine, FaLock } from "react-icons/fa";
+import dashboardImg from "../assets/dashboard.jpg";
+
+// Animation variants
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (custom: number = 1) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: custom * 0.15, duration: 0.7, type: "spring" as const },
+  }),
+};
 
 const features = [
   {
     icon: <FaMobileAlt className="text-indigo-600 text-3xl mb-4" />,
-    title: "Mobile Banking",
-    desc: "Bank anywhere, anytime with our secure mobile app.",
+    title: "Expense Splitter",
+    desc: "Split expenses with friends and family with ease.",
   },
   {
     icon: <FaChartLine className="text-green-500 text-3xl mb-4" />,
@@ -15,8 +26,8 @@ const features = [
   },
   {
     icon: <FaLock className="text-blue-500 text-3xl mb-4" />,
-    title: "Top-Notch Security",
-    desc: "Your data and money are protected with industry-leading security.",
+    title: "Goal Planner",
+    desc: "Plan for your financial goals with milestone, deadlines and progress visuals.",
   },
 ];
 
@@ -41,8 +52,13 @@ const steps = [
 export default function LandingPage() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-indigo-50 via-white to-blue-50 font-sans">
-      {/* Navbar */}
-      <nav className="w-full flex items-center justify-between px-8 py-6 bg-white/80 shadow-sm">
+      {/* Animated Navbar */}
+      <motion.nav
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        className="w-full flex items-center justify-between px-8 py-6 bg-white/80 shadow-sm"
+      >
         <div className="flex items-center gap-2">
           <FaPiggyBank className="text-indigo-600 text-2xl" />
           <span className="font-bold text-xl tracking-tight">FinFlow</span>
@@ -52,15 +68,10 @@ export default function LandingPage() {
           <a href="#how" className="hover:text-indigo-600 transition">How it Works</a>
           <a href="#contact" className="hover:text-indigo-600 transition">Contact</a>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* Hero Section */}
-      <motion.section
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto px-8 py-20 gap-12 w-full"
-      >
+      <section className="flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto px-8 py-20 gap-12 w-full">
         {/* Left: Text */}
         <div className="flex-1 flex flex-col items-start justify-center">
           <motion.h1
@@ -69,7 +80,7 @@ export default function LandingPage() {
             transition={{ delay: 0.2, duration: 0.7 }}
             className="text-4xl md:text-6xl font-extrabold text-gray-900 mb-6 leading-tight"
           >
-            Smarter Banking for Modern Life
+            Save Bold - Invest Smart - Sleep Peacefully
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -98,28 +109,42 @@ export default function LandingPage() {
           transition={{ delay: 0.5, duration: 0.7 }}
           className="flex-1 flex items-center justify-center"
         >
-          <div className="w-80 h-80 bg-gradient-to-br from-indigo-100 to-blue-100 rounded-3xl shadow-lg flex items-center justify-center relative">
-            {/* Placeholder for dashboard/phone illustration */}
-            <FaMobileAlt className="text-indigo-400 text-[7rem]" />
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white rounded-full px-6 py-2 shadow text-indigo-600 font-semibold text-lg">
-              Digital Banking
-            </div>
-          </div>
+          <motion.div
+            initial={{ rotate: -10 }}
+            animate={{ rotate: 0 }}
+            transition={{ delay: 0.8, duration: 0.7, type: "spring" }}
+            className="w-80 h-80 bg-gradient-to-br from-indigo-100 to-blue-100 rounded-3xl shadow-lg flex items-center justify-center relative overflow-hidden"
+          >
+            <img
+              src={dashboardImg}
+              alt="Dashboard"
+              className="object-cover w-full h-full rounded-3xl"
+            />
+          </motion.div>
         </motion.div>
-      </motion.section>
+      </section>
 
       {/* Features Section */}
       <section id="features" className="py-16 px-4 bg-white">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Powerful Features</h2>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="text-3xl md:text-4xl font-bold text-center mb-12"
+          >
+            Powerful Features
+          </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {features.map((f, i) => (
               <motion.div
                 key={f.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                variants={fadeInUp}
+                initial="hidden"
+                whileInView="visible"
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.15, duration: 0.7 }}
+                custom={i}
                 className="bg-gradient-to-br from-indigo-50 to-white rounded-2xl p-8 shadow hover:shadow-2xl hover:scale-105 border border-gray-100 flex flex-col items-center text-center transition"
                 whileHover={{ scale: 1.05, boxShadow: "0 8px 32px rgba(99,102,241,0.15)" }}
               >
@@ -135,15 +160,24 @@ export default function LandingPage() {
       {/* How It Works Section */}
       <section id="how" className="py-16 px-4 bg-gradient-to-r from-blue-50 via-white to-indigo-50">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">How It Works</h2>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="text-3xl md:text-4xl font-bold text-center mb-12"
+          >
+            How It Works
+          </motion.h2>
           <div className="flex flex-col md:flex-row items-center justify-center gap-8">
             {steps.map((step, i) => (
               <motion.div
                 key={step.number}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                variants={fadeInUp}
+                initial="hidden"
+                whileInView="visible"
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.2, duration: 0.7 }}
+                custom={i}
                 className="flex flex-col items-center text-center bg-white rounded-2xl shadow p-8 w-64 hover:shadow-2xl hover:scale-105 transition"
                 whileHover={{ scale: 1.05, boxShadow: "0 8px 32px rgba(99,102,241,0.15)" }}
               >
