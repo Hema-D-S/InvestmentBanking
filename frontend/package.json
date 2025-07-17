@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "investment-banking-frontend",
   "version": "1.0.0",
   "description": "Frontend for Investment Banking Platform",
@@ -54,3 +55,31 @@
   },
   "proxy": "http://localhost:8000"
 } 
+=======
+  "name": "frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "framer-motion": "^12.23.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-icons": "^5.5.0",
+    "recharts": "^3.0.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss7-compat": "^2.2.17",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "autoprefixer": "^9.8.8",
+    "postcss": "^7.0.39",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
+    "typescript": "^5.8.3",
+    "vite": "^5.4.19"
+  }
+}
+>>>>>>> 8fd6958e2592dc5ac7bb552e19707f09e1e01f1a
