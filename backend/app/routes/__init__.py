@@ -1,1 +1,9 @@
- 
+from .dashboard import router as dashboard_router
+from .emergency_fund import router as emergency_fund_router
+from .expense_splitter import router as expense_splitter_router
+from .goal_planner import router as goal_planner_router
+from .health_report import router as health_report_router
+from .income_expense import router as income_expense_router
+from .investment import router as investment_router
+from .notifications import router as notifications_router
+from .savings_advisor import router as savings_advisor_router 
